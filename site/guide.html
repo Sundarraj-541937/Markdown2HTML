@@ -6,7 +6,54 @@
     </head>
     <body>
         <h1>Guide</h1>
-        
+        <h1>Docker Beginner Guide</h1>
+<p>Docker helps developers package applications and run them consistently across environments.</p>
+<h2>What is Docker?</h2>
+<p>Docker is a containerization platform that allows applications to run in isolated environments called containers.</p>
+<h2>Why Use Docker?</h2>
+<ul>
+<li>Consistent environments</li>
+<li>Easy deployment</li>
+<li>Lightweight compared to virtual machines</li>
+<li>Simplifies dependency management</li>
+</ul>
+<h2>Install Docker</h2>
+<h3>Ubuntu</h3>
+<p><code>bash
+sudo apt update
+sudo apt install docker.io</code></p>
+<h3>Verify Installation</h3>
+<p><code>bash
+docker --version</code></p>
+<h2>Basic Docker Commands</h2>
+<h3>Pull an Image</h3>
+<p><code>bash
+docker pull nginx</code></p>
+<h3>Run a Container</h3>
+<p><code>bash
+docker run -d -p 8080:80 nginx</code></p>
+<h3>List Running Containers</h3>
+<p><code>bash
+docker ps</code></p>
+<h3>Stop a Container</h3>
+<p><code>bash
+docker stop &lt;container-id&gt;</code></p>
+<h2>Example Dockerfile</h2>
+<p>```dockerfile
+FROM python:3.11</p>
+<p>WORKDIR /app</p>
+<p>COPY . .</p>
+<p>RUN pip install -r requirements.txt</p>
+<p>CMD ["python", "app.py"]
+```</p>
+<h2>Benefits of Containers</h2>
+<p>| Feature | Benefit |
+|--------|---------|
+| Isolation | Prevents dependency conflicts |
+| Portability | Runs anywhere |
+| Fast Startup | Lightweight execution |</p>
+<h2>Conclusion</h2>
+<p>Docker is an essential tool for modern DevOps and cloud-native development.</p>
     </body>
     </html>
     
