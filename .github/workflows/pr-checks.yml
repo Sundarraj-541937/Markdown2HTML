@@ -1,0 +1,66 @@
+name: PR Quality Checks
+
+on:
+  pull_request:
+
+jobs:
+  quality-check:
+    runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: write
+      contents: read
+
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run flake8
+      run: |
+        flake8 converter.py > flake8-report.txt || true
+
+    - name: Run bandit
+      run: |
+        bandit converter.py > bandit-report.txt || true
+
+    - name: Run pytest
+      run: |
+        pytest > pytest-report.txt || true
+
+    - name: Generate report
+      run: |
+        echo "## PR Quality Report" > report.md
+
+        echo "" >> report.md
+        echo "### Flake8 Results" >> report.md
+        echo '```' >> report.md
+        cat flake8-report.txt >> report.md
+        echo '```' >> report.md
+
+        echo "" >> report.md
+        echo "### Bandit Results" >> report.md
+        echo '```' >> report.md
+        cat bandit-report.txt >> report.md
+        echo '```' >> report.md
+
+        echo "" >> report.md
+        echo "### Pytest Results" >> report.md
+        echo '```' >> report.md
+        cat pytest-report.txt >> report.md
+        echo '```' >> report.md
+
+    - name: Post PR Comment
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        gh pr comment ${{ github.event.pull_request.number }} --body-file report.md

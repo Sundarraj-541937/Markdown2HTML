@@ -1,1 +1,4 @@
-Markdown==3.10.2
+markdown
+pytest
+flake8
+bandit
