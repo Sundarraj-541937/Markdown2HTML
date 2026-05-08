@@ -87,3 +87,4 @@ index_html = f"""
 (SITE_DIR / "index.html").write_text(index_html)
 
 print("Site generated successfully!")
+print("Testing PR workflow")
