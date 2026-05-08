@@ -78,4 +78,4 @@ CMD ["python", "app.py"]
 
 ## Conclusion
 
-Docker is an essential tool for modern DevOps and cloud-native development.
+Docker is an essential tool for modern DevOps development.
